@@ -2,11 +2,16 @@ package com.microsoft.cosmic.visualizer.services;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.microsoft.cosmic.visualizer.dao.*;
 import com.microsoft.cosmic.visualizer.entity.NamespaceInput;
+import com.microsoft.cosmic.visualizer.entity.Topology;
+import com.microsoft.cosmic.visualizer.entity.TopologyInput;
 import com.microsoft.cosmic.visualizer.jsonentity.NamespaceInstanceMappingInfo;
 import com.microsoft.cosmic.visualizer.jsonentity.NamespaceMetadata;
 import com.microsoft.cosmic.visualizer.jsonentity.SiloInfo;
 import com.microsoft.cosmic.visualizer.jsonentity.SubscriptionInfo;
+import com.microsoft.cosmic.visualizer.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +23,28 @@ import java.lang.reflect.Type;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class InventoryService {
+
+    @Autowired
+    private NamespaceInstanceRepository namespaceInstanceRepository;
+
+    @Autowired
+    private NamespaceRepository namespaceRepository;
+
+    @Autowired
+    private NamespaceSiloMappingRepository namespaceSiloMappingRepository;
+
+    @Autowired
+    private SiloRepository siloRepository;
+
+    @Autowired
+    private SiloInstanceRepository siloInstanceRepository;
 
     @Value("${visualizer.inventory.basepath}")
     private String griffinRepo;
@@ -132,4 +153,17 @@ public class InventoryService {
         return gson.fromJson(new FileReader(filePath.toString()), type);
     }
 
+    public Topology getTopology(TopologyInput topologyInput) {
+        Namespace namespace=namespaceRepository.findByName(topologyInput.getNamespaceName());
+        NamespaceInstance namespaceInstance=namespaceInstanceRepository.findByNid(namespace.getId());
+        List<Silo> siloList=new LinkedList<>();
+        List<NamespaceSiloMapping> namespaceSiloMappingList=namespaceSiloMappingRepository.
+                findByNamespaceId(namespace.getId());
+        for(NamespaceSiloMapping namespaceSiloMapping:namespaceSiloMappingList){
+            siloList.add(siloRepository.findById(namespaceSiloMapping.getSiloId());
+        }
+        
+
+        return new Topology();
+    }
 }

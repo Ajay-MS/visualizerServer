@@ -1,6 +1,8 @@
 package com.microsoft.cosmic.visualizer.controllers;
 
 import com.microsoft.cosmic.visualizer.entity.NamespaceInput;
+import com.microsoft.cosmic.visualizer.entity.Topology;
+import com.microsoft.cosmic.visualizer.entity.TopologyInput;
 import com.microsoft.cosmic.visualizer.jsonentity.NamespaceMetadata;
 import com.microsoft.cosmic.visualizer.services.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,12 @@ public class NamespaceController {
     @PostMapping(value = "/info", produces = "application/json; charset=utf-8")
     public NamespaceMetadata getNamespaceInfo(@RequestBody NamespaceInput namespaceInput) throws IOException {
         return inventoryService.getNamespaceMetadataInfo(namespaceInput);
+    }
+
+
+    @PostMapping(value = "/topology", produces = "application/json; charset=utf-8")
+    public Topology getNamespaceInfo(@RequestBody TopologyInput topologyInput) throws IOException {
+        return inventoryService.getTopology(topologyInput);
     }
 
 

@@ -22,7 +22,7 @@ public class NamespaceInstanceService {
         namesapceRepository.save(namespaceInstance);
     }
 
-    public NamespaceInstance getByNid(String nid) {
+    public NamespaceInstance getByNid(Long nid) {
         return namesapceRepository.findByNid(nid);
     }
 
