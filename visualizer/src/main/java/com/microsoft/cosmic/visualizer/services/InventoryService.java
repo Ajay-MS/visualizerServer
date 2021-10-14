@@ -153,5 +153,13 @@ public class InventoryService {
         return gson.fromJson(new FileReader(filePath.toString()), type);
     }
 
+    public List<String> getRings() throws IOException {
+        Map<String, List<SubscriptionInfo>> subInfo = getSubscriptionMetadata();
+
+        return subInfo.keySet()
+                .stream()
+                .collect(Collectors.toList());
+    }
+
 
 }

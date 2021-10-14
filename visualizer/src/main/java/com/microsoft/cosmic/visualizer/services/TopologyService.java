@@ -79,7 +79,7 @@ public class TopologyService {
                     clusters.add(new TopologyNode(clusterName, "cluster", null));
                 }
 
-                jATMs.add(new TopologyNode(jATMName, "atm", clusters));
+                jATMs.add(new TopologyNode(jATMName, "atm-internal", clusters));
             }
 
             atms.add(new TopologyNode(pName, "atm", jATMs));
