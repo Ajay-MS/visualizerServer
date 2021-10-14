@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.microsoft.cosmic.visualizer.dao.*;
 import com.microsoft.cosmic.visualizer.entity.NamespaceInput;
-import com.microsoft.cosmic.visualizer.entity.Topology;
+import com.microsoft.cosmic.visualizer.entity.TopologyNode;
 import com.microsoft.cosmic.visualizer.entity.TopologyInput;
 import com.microsoft.cosmic.visualizer.jsonentity.NamespaceInstanceMappingInfo;
 import com.microsoft.cosmic.visualizer.jsonentity.NamespaceMetadata;
@@ -153,17 +153,5 @@ public class InventoryService {
         return gson.fromJson(new FileReader(filePath.toString()), type);
     }
 
-    public Topology getTopology(TopologyInput topologyInput) {
-        Namespace namespace=namespaceRepository.findByName(topologyInput.getNamespaceName());
-        NamespaceInstance namespaceInstance=namespaceInstanceRepository.findByNid(namespace.getId());
-        List<Silo> siloList=new LinkedList<>();
-        List<NamespaceSiloMapping> namespaceSiloMappingList=namespaceSiloMappingRepository.
-                findByNamespaceId(namespace.getId());
-        for(NamespaceSiloMapping namespaceSiloMapping:namespaceSiloMappingList){
-            siloList.add(siloRepository.findById(namespaceSiloMapping.getSiloId());
-        }
-        
 
-        return new Topology();
-    }
 }

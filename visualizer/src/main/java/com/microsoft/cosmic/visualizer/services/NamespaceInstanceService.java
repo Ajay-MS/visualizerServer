@@ -22,9 +22,18 @@ public class NamespaceInstanceService {
         namesapceRepository.save(namespaceInstance);
     }
 
-    public NamespaceInstance getByNid(Long nid) {
+    public NamespaceInstance getByNid(String nid) {
         return namesapceRepository.findByNid(nid);
     }
+
+    public List<NamespaceInstance> getByNamespaceId(Long namespaceId) {
+        return namesapceRepository.findByNamespaceId(namespaceId);
+    }
+
+    public List<NamespaceInstance> getByNamespaceIdAndRingId(Long namespaceId, Long ringId) {
+        return namesapceRepository.findByNamespaceId(namespaceId);
+    }
+
 
     public NamespaceInstance get(Long id) {
         return namesapceRepository.getById(id);

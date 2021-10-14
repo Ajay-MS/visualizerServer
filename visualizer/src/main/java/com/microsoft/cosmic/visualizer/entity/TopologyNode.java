@@ -9,9 +9,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Topology {
+public class TopologyNode {
     private String name;
     private String type;
-    private List<Topology> children;
+    private List<TopologyNode> children;
 
 }

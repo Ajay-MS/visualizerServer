@@ -28,4 +28,8 @@ public class NISIMappingService {
     public NISIMapping findBySINIMapping(Long siloInstanceId, String namespaceInstanceId) {
         return nisiRepository.findBySiloInstanceIdAndNamespaceInstanceId(siloInstanceId, namespaceInstanceId);
     }
+
+    public NISIMapping findByNamespaceInstanceId(String namespaceInstanceId) {
+        return nisiRepository.findByNamespaceInstanceId(namespaceInstanceId);
+    }
 }
